@@ -1,4 +1,3 @@
-console.log("Hello world");
 import { v4 as uuidv4 } from "uuid";
 
 type Item = {
@@ -15,7 +14,18 @@ type User = {
     cart: Item[];
 };
 
-function createItem({ name, price, description }: Item) {
+function createUser(name: string, age: number) {
+    const newUser: User = {
+        id: uuidv4(),
+        name: name,
+        age: age,
+        cart: [],
+    };
+
+    return newUser;
+}
+
+function createItem(name: string, price: number, description: string) {
     const item: Item = {
         id: uuidv4(),
         name: name,
@@ -46,6 +56,8 @@ function removeQuantityFromCart(item: Item, user: User, count: number) {
             newCart.push(itemCart);
         }
     }
+
+    user.cart = [...newCart];
 }
 
 function cartTotal(user: User) {
@@ -61,11 +73,42 @@ function printCart(user: User) {
     console.table(user.cart);
 }
 
-let person: Item = {
-    id: uuidv4(),
-    name: "Dylan",
-    price: 20.99,
-    description: "Best",
-};
+// Add 3 Item B to the users Cart
+// print the contents of the user's cart
+// print the Total of the user's cart
 
-console.log(person);
+function main(): void {
+    const user = createUser("Dylan", 20);
+    const itemA = createItem("Nike", 20.99, "Best in the world");
+    const itemB = createItem("Apple Mac", 2000.99, "Not too bad");
+    const itemC = createItem("Carrots", 25.99, "Good enough for your eyes");
+    addToCart(itemA, user);
+    printCart(user);
+    console.log(user.name, "total is", cartTotal(user));
+
+    addToCart(itemB, user);
+    addToCart(itemB, user);
+    addToCart(itemB, user);
+
+    printCart(user);
+    console.log(user.name, "total is", cartTotal(user));
+
+    addToCart(itemC, user);
+    addToCart(itemC, user);
+    addToCart(itemC, user);
+
+    printCart(user);
+    console.log(user.name, "total is", cartTotal(user));
+
+    removeFromCart(itemB, user);
+    removeFromCart(itemB, user);
+    removeFromCart(itemB, user);
+
+    printCart(user);
+    console.log(user.name, "total is", cartTotal(user));
+
+    removeQuantityFromCart(itemC, user, 2);
+    printCart(user);
+    console.log(user.name, "total is", cartTotal(user));
+}
+main();
