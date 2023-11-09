@@ -1,0 +1,19 @@
+{
+    "name": "shopping-cart",
+    "version": "1.0.0",
+    "description": "Another shopping cart assignment",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "tsc && node ./dist/index.js"
+    },
+    "author": "Dylan Heslop",
+    "license": "ISC",
+    "dependencies": {
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/uuid": "^9.0.7",
+        "typescript": "^5.2.2"
+    }
+}
